@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
 const camps = [
+  { id: 'test', name: 'Test Registration', price: 1, ages: 'Staff Testing Only' },
   { id: 'summer', name: 'Summer Camp', price: 350, ages: 'Ages 7-17' },
   { id: 'bulldog-120', name: 'Bulldog 120', price: 125, ages: 'High School' },
   { id: 'experience', name: 'Bulldog Experience', price: 135, ages: 'High School' },

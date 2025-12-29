@@ -10,6 +10,11 @@ function getStripe() {
 }
 
 const camps: Record<string, { name: string; price: number; description: string }> = {
+  'test': {
+    name: 'Test Registration',
+    price: 100, // $1.00 in cents
+    description: 'Staff testing only',
+  },
   'summer': {
     name: 'Summer Lacrosse Camp',
     price: 35000, // $350.00 in cents
