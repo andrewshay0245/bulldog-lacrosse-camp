@@ -5,6 +5,15 @@ import { google } from 'googleapis';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
+// Map camp IDs to sheet names
+const campSheetNames: Record<string, string> = {
+  'test': 'Test',
+  'summer': 'Summer Camp',
+  'bulldog-120': 'Bulldog 120',
+  'experience': 'Bulldog Experience',
+  'clash': 'Bulldog Clash',
+};
+
 async function addToSheet(data: {
   date: string;
   camp: string;
@@ -30,9 +39,12 @@ async function addToSheet(data: {
 
     const sheets = google.sheets({ version: 'v4', auth });
 
+    // Get the sheet name for this camp, default to "Other" if not found
+    const sheetName = campSheetNames[data.camp] || 'Other';
+
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: 'Sheet1!A:M',
+      range: `'${sheetName}'!A:M`,
       valueInputOption: 'USER_ENTERED',
       requestBody: {
         values: [[
@@ -53,7 +65,7 @@ async function addToSheet(data: {
       },
     });
 
-    console.log('Added registration to Google Sheet');
+    console.log(`Added registration to ${sheetName} sheet`);
   } catch (error) {
     console.error('Google Sheets error:', error);
   }
