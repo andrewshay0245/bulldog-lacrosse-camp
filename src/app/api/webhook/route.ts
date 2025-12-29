@@ -5,13 +5,13 @@ import { google } from 'googleapis';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
-// Map camp IDs to sheet names
+// Map camp IDs to sheet names (by year)
 const campSheetNames: Record<string, string> = {
   'test': 'Test',
-  'summer': 'Summer Camp',
-  'bulldog-120': 'Bulldog 120',
-  'experience': 'Bulldog Experience',
-  'clash': 'Bulldog Clash',
+  'summer': 'BLC26',
+  'bulldog-120': 'B12026',
+  'experience': 'BEx26',
+  'clash': 'BClash26',
 };
 
 async function addToSheet(data: {
