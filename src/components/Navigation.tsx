@@ -63,11 +63,15 @@ export default function Navigation() {
                 </svg>
               </button>
               {prospectsDropdown && (
-                <div className="absolute top-full left-0 bg-white text-gray-800 rounded-lg shadow-lg py-2 min-w-48">
+                <div className="absolute top-full left-0 bg-white text-gray-800 rounded-lg shadow-lg py-2 min-w-56">
                   <Link href="/prospects/clash" className="block px-4 py-2 hover:bg-gray-100">Bulldog Clash</Link>
-                  <a href="https://nxtsports.com" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 hover:bg-gray-100">
-                    Bulldog Bash →
+                  <a href="https://nxtsports.com/events/boys-summer-bulldog-bash/" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 hover:bg-gray-100">
+                    Summer Bulldog Bash →
                   </a>
+                  <div className="block px-4 py-2 text-gray-400 cursor-not-allowed">
+                    <span>Fall Bulldog Bash</span>
+                    <span className="block text-xs">(2026 Dates coming soon)</span>
+                  </div>
                 </div>
               )}
             </div>
@@ -108,7 +112,11 @@ export default function Navigation() {
           <div className="border-t border-blue-800 pt-2">
             <p className="text-gray-300 text-sm mb-2">Prospects</p>
             <Link href="/prospects/clash" className="block py-2 pl-4">Bulldog Clash</Link>
-            <a href="https://nxtsports.com" target="_blank" className="block py-2 pl-4">Bulldog Bash →</a>
+            <a href="https://nxtsports.com/events/boys-summer-bulldog-bash/" target="_blank" className="block py-2 pl-4">Summer Bulldog Bash →</a>
+            <div className="block py-2 pl-4 text-gray-500">
+              <span>Fall Bulldog Bash</span>
+              <span className="text-xs ml-1">(2026 Dates coming soon)</span>
+            </div>
           </div>
           <Link href="/faq" className="block py-2 border-t border-blue-800 pt-4">FAQ</Link>
           <Link href="/contact" className="block py-2">Contact</Link>
