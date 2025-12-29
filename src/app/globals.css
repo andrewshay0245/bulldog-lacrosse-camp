@@ -1,6 +1,22 @@
 @import "tailwindcss";
 
+/* QB One Bold - Custom Font */
+@font-face {
+  font-family: 'QB One';
+  src: url('/fonts/QBOne-Bold.woff2') format('woff2'),
+       url('/fonts/QBOne-Bold.woff') format('woff'),
+       url('/fonts/QBOne-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
+  --font-qb-one: 'QB One', Impact, sans-serif;
+  --yale-blue: #00356b;
+  --yale-blue-light: #286dc0;
+  --yale-gray: #4a4a4a;
+  --yale-white: #f9f9f9;
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -8,19 +24,48 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-yale-blue: var(--yale-blue);
+  --color-yale-blue-light: var(--yale-blue-light);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-qb-one);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Utility class for QB One font */
+.font-display {
+  font-family: var(--font-qb-one);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn-primary {
+  background-color: var(--yale-blue);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: var(--yale-blue-light);
+}
+
+.btn-secondary {
+  background-color: white;
+  color: var(--yale-blue);
+  border: 2px solid var(--yale-blue);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: var(--yale-blue);
+  color: white;
 }
