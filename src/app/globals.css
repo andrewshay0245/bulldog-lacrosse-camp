@@ -1,17 +1,6 @@
 @import "tailwindcss";
 
-/* QB One Bold - Display Font */
-@font-face {
-  font-family: 'QB One';
-  src: url('/fonts/QBOne-Bold.woff2') format('woff2'),
-       url('/fonts/QBOne-Bold.woff') format('woff'),
-       url('/fonts/QBOne-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Aldo - Body Font */
+/* Aldo - Display/Headline Font */
 @font-face {
   font-family: 'Aldo';
   src: url('/fonts/Aldo.ttf') format('truetype');
@@ -21,8 +10,8 @@
 }
 
 :root {
-  --font-qb-one: 'QB One', Impact, sans-serif;
-  --font-aldo: 'Aldo', Arial, Helvetica, sans-serif;
+  --font-aldo: 'Aldo', Impact, sans-serif;
+  --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --yale-blue: #00356b;
   --yale-blue-light: #286dc0;
   --yale-gray: #4a4a4a;
@@ -36,21 +25,21 @@
   --color-foreground: var(--foreground);
   --color-yale-blue: var(--yale-blue);
   --color-yale-blue-light: var(--yale-blue-light);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-body);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-qb-one);
+  --font-display: var(--font-aldo);
 }
 
-/* Utility class for QB One font */
+/* Utility class for Aldo headlines */
 .font-display {
-  font-family: var(--font-qb-one);
+  font-family: var(--font-aldo);
+  text-transform: uppercase;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-aldo);
-  text-transform: uppercase;
+  font-family: var(--font-body);
 }
 
 .btn-primary {
