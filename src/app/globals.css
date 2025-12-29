@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* QB One Bold - Custom Font */
+/* QB One Bold - Display Font */
 @font-face {
   font-family: 'QB One';
   src: url('/fonts/QBOne-Bold.woff2') format('woff2'),
@@ -11,8 +11,18 @@
   font-display: swap;
 }
 
+/* Aldo - Body Font */
+@font-face {
+  font-family: 'Aldo';
+  src: url('/fonts/Aldo.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --font-qb-one: 'QB One', Impact, sans-serif;
+  --font-aldo: 'Aldo', Arial, Helvetica, sans-serif;
   --yale-blue: #00356b;
   --yale-blue-light: #286dc0;
   --yale-gray: #4a4a4a;
@@ -39,7 +49,8 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-aldo);
+  text-transform: uppercase;
 }
 
 .btn-primary {
