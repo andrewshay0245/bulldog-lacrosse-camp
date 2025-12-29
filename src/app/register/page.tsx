@@ -121,21 +121,28 @@ function RegisterForm() {
             <div className="bg-white rounded-xl shadow-lg p-8">
               <h2 className="text-2xl font-bold mb-6 text-[#00356b]">Select Your Camp</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {camps.map((camp) => (
-                  <div
-                    key={camp.id}
-                    className={`border-2 rounded-xl p-6 cursor-pointer transition ${
-                      formData.selectedCamp === camp.id
-                        ? 'border-[#00356b] bg-blue-50'
-                        : 'border-gray-200 hover:border-gray-300'
-                    }`}
-                    onClick={() => setFormData({ ...formData, selectedCamp: camp.id })}
-                  >
-                    <h3 className="font-bold text-lg">{camp.name}</h3>
-                    <p className="text-gray-600 text-sm">{camp.ages}</p>
-                    <p className="text-2xl font-bold text-[#00356b] mt-2">${camp.price}</p>
-                  </div>
-                ))}
+                {camps.map((camp) => {
+                  const isLocked = preselectedCamp && preselectedCamp !== camp.id;
+                  const isSelected = formData.selectedCamp === camp.id;
+
+                  return (
+                    <div
+                      key={camp.id}
+                      className={`border-2 rounded-xl p-6 transition ${
+                        isLocked
+                          ? 'border-gray-200 bg-gray-100 opacity-50 cursor-not-allowed'
+                          : isSelected
+                            ? 'border-[#00356b] bg-blue-50 cursor-pointer'
+                            : 'border-gray-200 hover:border-gray-300 cursor-pointer'
+                      }`}
+                      onClick={() => !isLocked && setFormData({ ...formData, selectedCamp: camp.id })}
+                    >
+                      <h3 className={`font-bold text-lg ${isLocked ? 'text-gray-400' : ''}`}>{camp.name}</h3>
+                      <p className={`text-sm ${isLocked ? 'text-gray-400' : 'text-gray-600'}`}>{camp.ages}</p>
+                      <p className={`text-2xl font-bold mt-2 ${isLocked ? 'text-gray-400' : 'text-[#00356b]'}`}>${camp.price}</p>
+                    </div>
+                  );
+                })}
               </div>
               <div className="mt-8 flex justify-end">
                 <button
