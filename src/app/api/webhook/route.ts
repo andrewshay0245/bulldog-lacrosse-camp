@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { google } from 'googleapis';
+import { sendConfirmationEmail } from '@/lib/email';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+// Lazy initialization to avoid build-time errors
+function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY!);
+}
 
 // Map camp IDs to sheet names (by year)
 const campSheetNames: Record<string, string> = {
@@ -12,6 +15,15 @@ const campSheetNames: Record<string, string> = {
   'bulldog-120': 'B12026',
   'experience': 'BEx26',
   'clash': 'BClash26',
+};
+
+// Display names for confirmation emails
+const campDisplayNames: Record<string, string> = {
+  'test': 'Test Registration',
+  'summer': 'Summer Lacrosse Camp',
+  'bulldog-120': 'Bulldog 120',
+  'experience': 'Bulldog Experience',
+  'clash': 'Bulldog Clash',
 };
 
 async function addToSheet(data: {
@@ -75,6 +87,9 @@ export async function POST(request: NextRequest) {
   const body = await request.text();
   const signature = request.headers.get('stripe-signature')!;
 
+  const stripe = getStripe();
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+
   let event: Stripe.Event;
 
   try {
@@ -88,10 +103,13 @@ export async function POST(request: NextRequest) {
     const session = event.data.object as Stripe.Checkout.Session;
     const metadata = session.metadata || {};
 
+    const amount = `$${((session.amount_total || 0) / 100).toFixed(2)}`;
+    const campId = metadata.campId || '';
+
     await addToSheet({
       date: new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }),
-      camp: metadata.campId || '',
-      amount: `$${((session.amount_total || 0) / 100).toFixed(2)}`,
+      camp: campId,
+      amount,
       camperName: metadata.camperName || '',
       camperEmail: metadata.camperEmail || '',
       position: metadata.position || '',
@@ -102,6 +120,22 @@ export async function POST(request: NextRequest) {
       parentPhone: metadata.parentPhone || '',
       paymentId: session.payment_intent as string || session.id,
     });
+
+    // Send confirmation email
+    if (session.customer_email) {
+      try {
+        await sendConfirmationEmail({
+          parentEmail: session.customer_email,
+          parentName: metadata.parentName || 'Parent/Guardian',
+          camperName: metadata.camperName || 'Camper',
+          campName: campDisplayNames[campId] || campId,
+          amount,
+        });
+        console.log('Confirmation email sent to', session.customer_email);
+      } catch (emailError) {
+        console.error('Failed to send confirmation email:', emailError);
+      }
+    }
   }
 
   return NextResponse.json({ received: true });
