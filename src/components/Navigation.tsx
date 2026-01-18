@@ -76,6 +76,7 @@ export default function Navigation() {
               )}
             </div>
 
+            <Link href="/gallery" className="hover:text-gray-300 transition">Gallery</Link>
             <Link href="/faq" className="hover:text-gray-300 transition">FAQ</Link>
             <Link href="/contact" className="hover:text-gray-300 transition">Contact</Link>
             <Link href="/register" className="bg-white text-[#00356b] px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
@@ -118,7 +119,8 @@ export default function Navigation() {
               <span className="text-xs ml-1">(2026 Dates coming soon)</span>
             </div>
           </div>
-          <Link href="/faq" className="block py-2 border-t border-blue-800 pt-4">FAQ</Link>
+          <Link href="/gallery" className="block py-2 border-t border-blue-800 pt-4">Gallery</Link>
+          <Link href="/faq" className="block py-2">FAQ</Link>
           <Link href="/contact" className="block py-2">Contact</Link>
           <Link href="/register" className="block bg-white text-[#00356b] text-center py-3 rounded-lg font-semibold mt-4">
             Register Now
