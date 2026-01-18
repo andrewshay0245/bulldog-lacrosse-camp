@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
@@ -13,6 +13,13 @@ const camps = [
 ];
 
 const positions = ['Attack', 'Midfield', 'Defense', 'LSM', 'Face Off', 'Goalie'];
+
+interface PositionAvailability {
+  registered: number;
+  limit: number;
+  available: number;
+  isFull: boolean;
+}
 
 function RegisterForm() {
   const searchParams = useSearchParams();
@@ -38,14 +45,38 @@ function RegisterForm() {
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [clashAvailability, setClashAvailability] = useState<Record<string, PositionAvailability> | null>(null);
+  const [loadingAvailability, setLoadingAvailability] = useState(false);
 
   const selectedCampData = camps.find(c => c.id === formData.selectedCamp);
+
+  const fetchClashAvailability = useCallback(async () => {
+    setLoadingAvailability(true);
+    try {
+      const response = await fetch('/api/clash/availability');
+      const data = await response.json();
+      if (data.availability) {
+        setClashAvailability(data.availability);
+      }
+    } catch (err) {
+      console.error('Failed to fetch availability:', err);
+    } finally {
+      setLoadingAvailability(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (preselectedCamp) {
       setFormData(prev => ({ ...prev, selectedCamp: preselectedCamp }));
     }
   }, [preselectedCamp]);
+
+  // Fetch availability when Clash is selected
+  useEffect(() => {
+    if (formData.selectedCamp === 'clash') {
+      fetchClashAvailability();
+    }
+  }, [formData.selectedCamp, fetchClashAvailability]);
 
   const handleCheckout = async () => {
     setIsLoading(true);
@@ -244,17 +275,39 @@ function RegisterForm() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">Position *</label>
-                      <select
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00356b] focus:border-transparent"
-                        value={formData.position}
-                        onChange={(e) => setFormData({ ...formData, position: e.target.value })}
-                      >
-                        <option value="">Select position...</option>
-                        {positions.map((pos) => (
-                          <option key={pos} value={pos}>{pos}</option>
-                        ))}
-                      </select>
+                      {formData.selectedCamp === 'clash' && loadingAvailability ? (
+                        <div className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500">
+                          Loading availability...
+                        </div>
+                      ) : (
+                        <select
+                          required
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00356b] focus:border-transparent"
+                          value={formData.position}
+                          onChange={(e) => setFormData({ ...formData, position: e.target.value })}
+                        >
+                          <option value="">Select position...</option>
+                          {positions.map((pos) => {
+                            const availability = formData.selectedCamp === 'clash' && clashAvailability ? clashAvailability[pos] : null;
+                            const isFull = availability?.isFull ?? false;
+                            const spotsLeft = availability?.available ?? null;
+
+                            return (
+                              <option key={pos} value={pos} disabled={isFull}>
+                                {pos}
+                                {formData.selectedCamp === 'clash' && spotsLeft !== null && (
+                                  isFull ? ' - SOLD OUT' : ` (${spotsLeft} spots left)`
+                                )}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      )}
+                      {formData.selectedCamp === 'clash' && clashAvailability && (
+                        <p className="text-xs text-gray-500 mt-1">
+                          Spots are limited. Availability updates in real-time.
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">School/Club *</label>

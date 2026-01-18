@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import ClashAvailability from '@/components/ClashAvailability';
 
 export const metadata = {
   title: 'Bulldog Clash | Bulldog Lacrosse Camps',
@@ -90,50 +90,7 @@ export default function ClashPage() {
 
             {/* Sidebar */}
             <div className="lg:col-span-1">
-              <div className="bg-gray-50 rounded-xl p-6 sticky top-24">
-                <div className="text-center mb-6">
-                  <span className="text-4xl font-bold text-[#00356b]">$350</span>
-                  <p className="text-gray-600">per position</p>
-                </div>
-
-                <h3 className="font-semibold mb-4">Registration Options</h3>
-                <div className="space-y-3 mb-6">
-                  <div className="flex justify-between items-center">
-                    <span>Attack</span>
-                    <span className="font-semibold">$350</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Midfield</span>
-                    <span className="font-semibold">$350</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Defense & LSM</span>
-                    <span className="font-semibold">$350</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Face Off</span>
-                    <span className="font-semibold">$350</span>
-                  </div>
-                  <div className="flex justify-between items-center text-gray-400">
-                    <span>Goalie</span>
-                    <span className="font-semibold">SOLD OUT</span>
-                  </div>
-                </div>
-
-                <Link
-                  href="/register?camp=clash"
-                  className="block w-full bg-[#00356b] text-white text-center py-3 rounded-lg font-semibold hover:bg-[#286dc0] transition"
-                >
-                  Register Now
-                </Link>
-
-                <p className="text-sm text-gray-500 text-center mt-4">
-                  Questions? Email{' '}
-                  <a href="mailto:blclacrossecamps@gmail.com" className="text-[#00356b] hover:underline">
-                    blclacrossecamps@gmail.com
-                  </a>
-                </p>
-              </div>
+              <ClashAvailability />
             </div>
           </div>
         </div>

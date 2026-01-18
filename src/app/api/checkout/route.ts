@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { google } from 'googleapis';
 
 // Initialize Stripe lazily to avoid build-time errors
 function getStripe() {
@@ -7,6 +8,51 @@ function getStripe() {
     throw new Error('STRIPE_SECRET_KEY is not configured');
   }
   return new Stripe(process.env.STRIPE_SECRET_KEY);
+}
+
+// Position limits for Bulldog Clash
+const CLASH_POSITION_LIMITS: Record<string, number> = {
+  'Attack': 40,
+  'Midfield': 50,
+  'Defense': 40,
+  'Goalie': 10,
+  'LSM': 15,
+  'Face Off': 10,
+};
+
+async function checkClashAvailability(position: string): Promise<{ available: boolean; spotsLeft: number }> {
+  const auth = new google.auth.GoogleAuth({
+    credentials: {
+      client_email: process.env.GOOGLE_SERVICE_EMAIL,
+      private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    },
+    scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
+  });
+
+  const sheets = google.sheets({ version: 'v4', auth });
+
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId: process.env.GOOGLE_SHEET_ID,
+    range: "'BClash26'!A:M",
+  });
+
+  const rows = response.data.values || [];
+  let count = 0;
+
+  for (const row of rows) {
+    if (!row[0] || row[0] === 'Date') continue;
+    if (row[5]?.trim() === position) {
+      count++;
+    }
+  }
+
+  const limit = CLASH_POSITION_LIMITS[position] || 0;
+  const spotsLeft = Math.max(0, limit - count);
+
+  return {
+    available: spotsLeft > 0,
+    spotsLeft,
+  };
 }
 
 const camps: Record<string, { name: string; price: number; description: string }> = {
@@ -45,6 +91,18 @@ export async function POST(request: NextRequest) {
     const camp = camps[campId];
     if (!camp) {
       return NextResponse.json({ error: 'Invalid camp selected' }, { status: 400 });
+    }
+
+    // Check position availability for Clash registrations
+    if (campId === 'clash' && position) {
+      const { available, spotsLeft } = await checkClashAvailability(position);
+      if (!available) {
+        return NextResponse.json(
+          { error: `Sorry, ${position} registration is now full. Please select a different position.` },
+          { status: 400 }
+        );
+      }
+      console.log(`Clash ${position}: ${spotsLeft} spots remaining`);
     }
 
     // Create Stripe Checkout Session

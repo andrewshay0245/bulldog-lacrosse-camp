@@ -14,6 +14,13 @@ export const metadata: Metadata = {
   title: "Bulldog Lacrosse Camps | Yale University",
   description: "Premier lacrosse camps at Yale University's Reese Stadium. Summer camps for ages 7-17, elite clinics for high school players, and prospect showcases with top college coaches.",
   keywords: "lacrosse camp, Yale lacrosse, New Haven CT, summer camp, lacrosse training, prospect camp",
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.png', type: 'image/png', sizes: '32x32' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 export default function RootLayout({
