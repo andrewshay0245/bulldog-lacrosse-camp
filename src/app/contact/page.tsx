@@ -10,11 +10,31 @@ export default function ContactPage() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // For now, just show success - in production, this would send to an API
-    setSubmitted(true);
+    setLoading(true);
+    setError('');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to send message');
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError('Failed to send message. Please try again or email us directly.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -163,11 +183,18 @@ export default function ContactPage() {
                     ></textarea>
                   </div>
 
+                  {error && (
+                    <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                      {error}
+                    </div>
+                  )}
+
                   <button
                     type="submit"
-                    className="w-full bg-[#00356b] text-white py-3 rounded-lg font-semibold hover:bg-[#286dc0] transition"
+                    disabled={loading}
+                    className="w-full bg-[#00356b] text-white py-3 rounded-lg font-semibold hover:bg-[#286dc0] transition disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Send Message
+                    {loading ? 'Sending...' : 'Send Message'}
                   </button>
                 </form>
               )}

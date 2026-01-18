@@ -201,16 +201,24 @@ export default function Home() {
       {/* Gallery Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12 text-[#00356b]">Camp Action</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             <div className="relative h-64 rounded-xl overflow-hidden">
-              <Image src="/images/camp-2.jpg" alt="Camp action" fill className="object-cover hover:scale-105 transition duration-300" />
+              <Image src="/images/camp-2.jpg" alt="Lacrosse action" fill className="object-cover hover:scale-105 transition duration-300" />
             </div>
             <div className="relative h-64 rounded-xl overflow-hidden">
-              <Image src="/images/camp-3.jpg" alt="Camp action" fill className="object-cover hover:scale-105 transition duration-300" />
+              <Image src="/images/gallery/mdp-BULLDOG2017-1.jpg" alt="Camp photo" fill className="object-cover hover:scale-105 transition duration-300" />
             </div>
             <div className="relative h-64 rounded-xl overflow-hidden">
-              <Image src="/images/action-2.jpg" alt="Camp action" fill className="object-cover hover:scale-105 transition duration-300" />
+              <Image src="/images/camp-3.jpg" alt="Lacrosse action" fill className="object-cover hover:scale-105 transition duration-300" />
+            </div>
+            <div className="relative h-64 rounded-xl overflow-hidden">
+              <Image src="/images/gallery/mdp-BULLDOG2017-10.jpg" alt="Camp photo" fill className="object-cover hover:scale-105 transition duration-300" />
+            </div>
+            <div className="relative h-64 rounded-xl overflow-hidden">
+              <Image src="/images/action-2.jpg" alt="Lacrosse action" fill className="object-cover hover:scale-105 transition duration-300" />
+            </div>
+            <div className="relative h-64 rounded-xl overflow-hidden">
+              <Image src="/images/gallery/mdp-BULLDOG2017-20.jpg" alt="Camp photo" fill className="object-cover hover:scale-105 transition duration-300" />
             </div>
           </div>
         </div>
@@ -231,7 +239,7 @@ export default function Home() {
                   <h3 className="font-semibold text-lg">Parking</h3>
                   <p className="text-gray-600">
                     Enter via Chapel Street and Yale Avenue. Cars will be directed to Lots E, F, and H.
-                    <strong className="block mt-1">$10 per car</strong> (Yale University policy)
+                    <strong className="block mt-1">Free parking</strong> for camps and prospect days.
                   </p>
                 </div>
                 <div>
