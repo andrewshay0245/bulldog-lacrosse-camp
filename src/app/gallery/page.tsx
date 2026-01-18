@@ -26,7 +26,6 @@ const images = [
   'mdp-BULLDOG2017-22.jpg',
   'mdp-BULLDOG2017-23-2.jpg',
   'mdp-BULLDOG2017-23.jpg',
-  'mdp-BULLDOG2017-24.jpg',
   'mdp-BULLDOG2017-25.jpg',
   'mdp-BULLDOG2017-26.jpg',
   'mdp-BULLDOG2017-27.jpg',
