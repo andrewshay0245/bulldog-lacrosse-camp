@@ -76,6 +76,7 @@ export default function Navigation() {
               )}
             </div>
 
+            <Link href="/lessons" className="hover:text-gray-300 transition">Lessons</Link>
             <Link href="/gallery" className="hover:text-gray-300 transition">Gallery</Link>
             <Link href="/faq" className="hover:text-gray-300 transition">FAQ</Link>
             <Link href="/contact" className="hover:text-gray-300 transition">Contact</Link>
@@ -119,7 +120,8 @@ export default function Navigation() {
               <span className="text-xs ml-1">(2026 Dates coming soon)</span>
             </div>
           </div>
-          <Link href="/gallery" className="block py-2 border-t border-blue-800 pt-4">Gallery</Link>
+          <Link href="/lessons" className="block py-2 border-t border-blue-800 pt-4">Lessons</Link>
+          <Link href="/gallery" className="block py-2">Gallery</Link>
           <Link href="/faq" className="block py-2">FAQ</Link>
           <Link href="/contact" className="block py-2">Contact</Link>
           <Link href="/register" className="block bg-white text-[#00356b] text-center py-3 rounded-lg font-semibold mt-4">
