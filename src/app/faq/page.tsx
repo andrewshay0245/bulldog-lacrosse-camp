@@ -64,7 +64,11 @@ export default function FAQPage() {
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-start">
                   <span className="text-[#00356b] font-bold mr-2">•</span>
-                  <strong>Parking Fee: $10 per car</strong> (Yale University policy - all proceeds go to Yale)
+                  <strong>Day Camps & Prospect Days:</strong> Parking is free.
+                </li>
+                <li className="flex items-start">
+                  <span className="text-[#00356b] font-bold mr-2">•</span>
+                  <strong>Yale Tournaments:</strong> $10 cash parking fee per car. This fee is charged by Yale University and is not controlled by Bulldog Lacrosse Camps.
                 </li>
                 <li className="flex items-start">
                   <span className="text-[#00356b] font-bold mr-2">•</span>
