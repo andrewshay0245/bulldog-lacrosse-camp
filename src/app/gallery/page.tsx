@@ -61,14 +61,14 @@ const images = [
   'mdp-BULLDOG2017-53.jpg',
   'mdp-BULLDOG2017-54.jpg',
   'mdp-BULLDOG2017-55.jpg',
+  'mdp-BULLDOG2017-56.jpg',
+  'mdp-BULLDOG2017-57.jpg',
+  'mdp-BULLDOG2017-58.jpg',
+  'mdp-BULLDOG2017-59.jpg',
   'mdp-BULLDOG2017-6.jpg',
   'mdp-BULLDOG2017-7.jpg',
   'mdp-BULLDOG2017-8.jpg',
   'mdp-BULLDOG2017-9.jpg',
-  'mdp-BULLDOG2017-BW-01.jpg',
-  'mdp-BULLDOG2017-BW-02.jpg',
-  'mdp-BULLDOG2017-BW-03.jpg',
-  'mdp-BULLDOG2017-BW-04.jpg',
 ];
 
 export default function GalleryPage() {
@@ -80,7 +80,7 @@ export default function GalleryPage() {
       <section className="bg-gradient-to-br from-[#00356b] to-[#286dc0] text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Photo Gallery</h1>
-          <p className="text-xl text-gray-200">Bulldog Lacrosse Camp 2017</p>
+          <p className="text-xl text-gray-200">Memories from Bulldog Lacrosse Camps</p>
         </div>
       </section>
 
@@ -103,6 +103,21 @@ export default function GalleryPage() {
                 />
               </div>
             ))}
+          </div>
+
+          {/* Photographer Credit */}
+          <div className="mt-8 text-center text-gray-600">
+            <p>
+              Photos by{' '}
+              <a
+                href="https://www.magsdepetrisphotography.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#00356b] hover:underline"
+              >
+                Mags DePetris Photography
+              </a>
+            </p>
           </div>
         </div>
       </section>
