@@ -24,6 +24,11 @@ const positions = ['Attack', 'Midfield', 'Defense', 'LSM', 'Face Off', 'Goalie']
 // Camps that have position limits
 const CAMPS_WITH_LIMITS = ['clash', 'bulldog-120', 'experience'];
 
+// Calculate processing fee (2.9% + $0.30)
+function calculateProcessingFee(price: number): number {
+  return Math.round((price * 0.029 + 0.30) * 100) / 100;
+}
+
 interface PositionAvailability {
   registered: number;
   limit: number;
@@ -409,25 +414,31 @@ function RegisterForm() {
 
               <div className="bg-gray-50 rounded-lg p-6 mb-8">
                 <h3 className="font-semibold mb-4">Order Summary</h3>
-                <div className="flex justify-between items-center mb-2">
-                  <span>{selectedCampData?.name}</span>
-                  <span className="font-semibold">${selectedCampData?.price}.00</span>
-                </div>
                 <div className="flex justify-between items-center text-sm text-gray-600 mb-2">
                   <span>Camper: {formData.camperFirstName} {formData.camperLastName}</span>
                 </div>
-                <div className="flex justify-between items-center text-sm text-gray-600 mb-2">
+                <div className="flex justify-between items-center text-sm text-gray-600 mb-4">
                   <span>Position: {formData.position}</span>
+                </div>
+                <div className="flex justify-between items-center mb-2">
+                  <span>{selectedCampData?.name}</span>
+                  <span>${selectedCampData?.price}.00</span>
+                </div>
+                <div className="flex justify-between items-center mb-2 text-sm text-gray-600">
+                  <span>Processing Fee (2.9% + $0.30)</span>
+                  <span>${selectedCampData ? calculateProcessingFee(selectedCampData.price).toFixed(2) : '0.00'}</span>
                 </div>
                 <div className="border-t pt-4 mt-4">
                   <div className="flex justify-between items-center text-lg font-bold">
                     <span>Total</span>
-                    <span className="text-[#00356b]">${selectedCampData?.price}.00</span>
+                    <span className="text-[#00356b]">
+                      ${selectedCampData ? (selectedCampData.price + calculateProcessingFee(selectedCampData.price)).toFixed(2) : '0.00'}
+                    </span>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-8">
                 <div className="flex items-start">
                   <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -439,13 +450,6 @@ function RegisterForm() {
                     </p>
                   </div>
                 </div>
-              </div>
-
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
-                <p className="text-sm text-blue-800">
-                  <strong>Processing Fee:</strong> Only 2.9% + $0.30 per transaction (Stripe&apos;s standard rate).
-                  No additional service fees!
-                </p>
               </div>
 
               {error && (
@@ -478,7 +482,7 @@ function RegisterForm() {
                       Processing...
                     </>
                   ) : (
-                    <>Pay ${selectedCampData?.price}.00 →</>
+                    <>Pay ${selectedCampData ? (selectedCampData.price + calculateProcessingFee(selectedCampData.price)).toFixed(2) : '0.00'} →</>
                   )}
                 </button>
               </div>

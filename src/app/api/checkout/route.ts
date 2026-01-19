@@ -52,6 +52,13 @@ async function checkPositionAvailability(campId: string, position: string): Prom
   };
 }
 
+// Calculate Stripe processing fee (2.9% + $0.30)
+function calculateProcessingFee(amountCents: number): number {
+  const percentageFee = Math.round(amountCents * 0.029);
+  const flatFee = 30; // $0.30 in cents
+  return percentageFee + flatFee;
+}
+
 const camps: Record<string, { name: string; price: number; description: string }> = {
   'summer': {
     name: 'Summer Lacrosse Camp',
@@ -97,6 +104,9 @@ export async function POST(request: NextRequest) {
       console.log(`${campId} ${position}: ${spotsLeft} spots remaining`);
     }
 
+    // Calculate processing fee
+    const processingFee = calculateProcessingFee(camp.price);
+
     // Create Stripe Checkout Session
     const stripe = getStripe();
     const session = await stripe.checkout.sessions.create({
@@ -110,6 +120,17 @@ export async function POST(request: NextRequest) {
               description: camp.description,
             },
             unit_amount: camp.price,
+          },
+          quantity: 1,
+        },
+        {
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: 'Processing Fee',
+              description: 'Credit card processing fee (2.9% + $0.30)',
+            },
+            unit_amount: processingFee,
           },
           quantity: 1,
         },
