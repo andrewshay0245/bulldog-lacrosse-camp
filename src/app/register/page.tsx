@@ -13,7 +13,6 @@ const heroImages = [
 ];
 
 const camps = [
-  { id: 'test', name: 'Test Registration', price: 1, ages: 'Staff Testing Only' },
   { id: 'summer', name: 'Summer Camp', price: 350, ages: 'Ages 7-17' },
   { id: 'bulldog-120', name: 'Bulldog 120', price: 125, ages: 'High School' },
   { id: 'experience', name: 'Bulldog Experience', price: 135, ages: 'High School' },
@@ -211,47 +210,9 @@ function RegisterForm() {
           {/* Step 2: Camper Info */}
           {step === 2 && (
             <div className="bg-white rounded-xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold mb-6 text-[#00356b]">
-                {formData.selectedCamp === 'test' ? 'Your Information' : 'Camper Information'}
-              </h2>
+              <h2 className="text-2xl font-bold mb-6 text-[#00356b]">Camper Information</h2>
 
-              {/* Simplified form for test registration */}
-              {formData.selectedCamp === 'test' ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">First Name *</label>
-                    <input
-                      type="text"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00356b] focus:border-transparent"
-                      value={formData.camperFirstName}
-                      onChange={(e) => setFormData({ ...formData, camperFirstName: e.target.value, parentFirstName: e.target.value })}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Last Name *</label>
-                    <input
-                      type="text"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00356b] focus:border-transparent"
-                      value={formData.camperLastName}
-                      onChange={(e) => setFormData({ ...formData, camperLastName: e.target.value, parentLastName: e.target.value })}
-                    />
-                  </div>
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
-                    <input
-                      type="email"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00356b] focus:border-transparent"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    />
-                  </div>
-                </div>
-              ) : (
-                <>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">First Name *</label>
                       <input
@@ -409,20 +370,18 @@ function RegisterForm() {
                     </div>
                   </div>
 
-                  <div className="mb-8">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Medical Conditions / Allergies
-                    </label>
-                    <textarea
-                      rows={3}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00356b] focus:border-transparent"
-                      placeholder="Please list any medical conditions, allergies, or special needs..."
-                      value={formData.medicalConditions}
-                      onChange={(e) => setFormData({ ...formData, medicalConditions: e.target.value })}
-                    ></textarea>
-                  </div>
-                </>
-              )}
+              <div className="mb-8">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Medical Conditions / Allergies
+                </label>
+                <textarea
+                  rows={3}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00356b] focus:border-transparent"
+                  placeholder="Please list any medical conditions, allergies, or special needs..."
+                  value={formData.medicalConditions}
+                  onChange={(e) => setFormData({ ...formData, medicalConditions: e.target.value })}
+                ></textarea>
+              </div>
 
               <div className="flex justify-between">
                 <button

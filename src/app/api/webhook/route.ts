@@ -10,7 +10,6 @@ function getStripe() {
 
 // Map camp IDs to sheet names (by year)
 const campSheetNames: Record<string, string> = {
-  'test': 'Test',
   'summer': 'BLC26',
   'bulldog-120': 'B12026',
   'experience': 'BEx26',
@@ -19,7 +18,6 @@ const campSheetNames: Record<string, string> = {
 
 // Display names for confirmation emails
 const campDisplayNames: Record<string, string> = {
-  'test': 'Test Registration',
   'summer': 'Summer Lacrosse Camp',
   'bulldog-120': 'Bulldog 120',
   'experience': 'Bulldog Experience',
