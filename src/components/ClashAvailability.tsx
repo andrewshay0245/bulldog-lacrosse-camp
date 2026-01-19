@@ -20,7 +20,7 @@ export default function ClashAvailability() {
   useEffect(() => {
     async function fetchAvailability() {
       try {
-        const response = await fetch('/api/clash/availability');
+        const response = await fetch('/api/camp-availability/clash');
         const data = await response.json();
         if (data.availability) {
           setAvailability(data.availability);

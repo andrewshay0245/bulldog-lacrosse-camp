@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { google } from 'googleapis';
+import { getPositionLimits, getSheetName, hasPositionLimits } from '@/lib/camp-config';
 
 // Initialize Stripe lazily to avoid build-time errors
 function getStripe() {
@@ -10,17 +11,12 @@ function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY);
 }
 
-// Position limits for Bulldog Clash
-const CLASH_POSITION_LIMITS: Record<string, number> = {
-  'Attack': 40,
-  'Midfield': 50,
-  'Defense': 40,
-  'Goalie': 10,
-  'LSM': 15,
-  'Face Off': 10,
-};
+async function checkPositionAvailability(campId: string, position: string): Promise<{ available: boolean; spotsLeft: number }> {
+  const positionLimits = getPositionLimits(campId);
+  if (!positionLimits) {
+    return { available: true, spotsLeft: 999 };
+  }
 
-async function checkClashAvailability(position: string): Promise<{ available: boolean; spotsLeft: number }> {
   const auth = new google.auth.GoogleAuth({
     credentials: {
       client_email: process.env.GOOGLE_SERVICE_EMAIL,
@@ -30,10 +26,11 @@ async function checkClashAvailability(position: string): Promise<{ available: bo
   });
 
   const sheets = google.sheets({ version: 'v4', auth });
+  const sheetName = getSheetName(campId);
 
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.GOOGLE_SHEET_ID,
-    range: "'BClash26'!A:M",
+    range: `'${sheetName}'!A:M`,
   });
 
   const rows = response.data.values || [];
@@ -46,7 +43,7 @@ async function checkClashAvailability(position: string): Promise<{ available: bo
     }
   }
 
-  const limit = CLASH_POSITION_LIMITS[position] || 0;
+  const limit = positionLimits[position] || 0;
   const spotsLeft = Math.max(0, limit - count);
 
   return {
@@ -93,16 +90,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid camp selected' }, { status: 400 });
     }
 
-    // Check position availability for Clash registrations
-    if (campId === 'clash' && position) {
-      const { available, spotsLeft } = await checkClashAvailability(position);
+    // Check position availability for camps with limits
+    if (hasPositionLimits(campId) && position) {
+      const { available, spotsLeft } = await checkPositionAvailability(campId, position);
       if (!available) {
         return NextResponse.json(
           { error: `Sorry, ${position} registration is now full. Please select a different position.` },
           { status: 400 }
         );
       }
-      console.log(`Clash ${position}: ${spotsLeft} spots remaining`);
+      console.log(`${campId} ${position}: ${spotsLeft} spots remaining`);
     }
 
     // Create Stripe Checkout Session

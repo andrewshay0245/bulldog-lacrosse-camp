@@ -22,6 +22,9 @@ const camps = [
 
 const positions = ['Attack', 'Midfield', 'Defense', 'LSM', 'Face Off', 'Goalie'];
 
+// Camps that have position limits
+const CAMPS_WITH_LIMITS = ['clash', 'bulldog-120', 'experience'];
+
 interface PositionAvailability {
   registered: number;
   limit: number;
@@ -54,18 +57,20 @@ function RegisterForm() {
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [clashAvailability, setClashAvailability] = useState<Record<string, PositionAvailability> | null>(null);
+  const [positionAvailability, setPositionAvailability] = useState<Record<string, PositionAvailability> | null>(null);
   const [loadingAvailability, setLoadingAvailability] = useState(false);
 
   const selectedCampData = camps.find(c => c.id === formData.selectedCamp);
+  const campHasLimits = CAMPS_WITH_LIMITS.includes(formData.selectedCamp);
 
-  const fetchClashAvailability = useCallback(async () => {
+  const fetchAvailability = useCallback(async (campId: string) => {
     setLoadingAvailability(true);
+    setPositionAvailability(null);
     try {
-      const response = await fetch('/api/clash/availability');
+      const response = await fetch(`/api/camp-availability/${campId}`);
       const data = await response.json();
       if (data.availability) {
-        setClashAvailability(data.availability);
+        setPositionAvailability(data.availability);
       }
     } catch (err) {
       console.error('Failed to fetch availability:', err);
@@ -80,12 +85,14 @@ function RegisterForm() {
     }
   }, [preselectedCamp]);
 
-  // Fetch availability when Clash is selected
+  // Fetch availability when a camp with limits is selected
   useEffect(() => {
-    if (formData.selectedCamp === 'clash') {
-      fetchClashAvailability();
+    if (CAMPS_WITH_LIMITS.includes(formData.selectedCamp)) {
+      fetchAvailability(formData.selectedCamp);
+    } else {
+      setPositionAvailability(null);
     }
-  }, [formData.selectedCamp, fetchClashAvailability]);
+  }, [formData.selectedCamp, fetchAvailability]);
 
   const handleCheckout = async () => {
     setIsLoading(true);
@@ -288,7 +295,7 @@ function RegisterForm() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">Position *</label>
-                      {formData.selectedCamp === 'clash' && loadingAvailability ? (
+                      {campHasLimits && loadingAvailability ? (
                         <div className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500">
                           Loading availability...
                         </div>
@@ -301,14 +308,14 @@ function RegisterForm() {
                         >
                           <option value="">Select position...</option>
                           {positions.map((pos) => {
-                            const availability = formData.selectedCamp === 'clash' && clashAvailability ? clashAvailability[pos] : null;
+                            const availability = campHasLimits && positionAvailability ? positionAvailability[pos] : null;
                             const isFull = availability?.isFull ?? false;
                             const spotsLeft = availability?.available ?? null;
 
                             return (
                               <option key={pos} value={pos} disabled={isFull}>
                                 {pos}
-                                {formData.selectedCamp === 'clash' && spotsLeft !== null && (
+                                {campHasLimits && spotsLeft !== null && (
                                   isFull ? ' - SOLD OUT' : ` (${spotsLeft} spots left)`
                                 )}
                               </option>
@@ -316,7 +323,7 @@ function RegisterForm() {
                           })}
                         </select>
                       )}
-                      {formData.selectedCamp === 'clash' && clashAvailability && (
+                      {campHasLimits && positionAvailability && (
                         <p className="text-xs text-gray-500 mt-1">
                           Spots are limited. Availability updates in real-time.
                         </p>
