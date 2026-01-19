@@ -7,9 +7,13 @@ export default function FAQPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-[#00356b] to-[#286dc0] text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Frequently Asked Questions</h1>
+      <section
+        className="relative bg-cover bg-center py-20"
+        style={{ backgroundImage: 'url(/images/camp-1.jpg)' }}
+      >
+        <div className="absolute inset-0 bg-[#00356b]/80"></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg">Frequently Asked Questions</h1>
           <p className="text-xl text-gray-200">Everything you need to know about our camps</p>
         </div>
       </section>

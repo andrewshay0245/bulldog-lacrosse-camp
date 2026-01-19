@@ -116,9 +116,13 @@ function RegisterForm() {
   return (
     <div>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-[#00356b] to-[#286dc0] text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Register</h1>
+      <section
+        className="relative bg-cover bg-center py-16"
+        style={{ backgroundImage: 'url(/images/hero-bg.jpg)' }}
+      >
+        <div className="absolute inset-0 bg-[#00356b]/80"></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg">Register</h1>
           <p className="text-xl text-gray-200">Complete your camp registration</p>
         </div>
       </section>
