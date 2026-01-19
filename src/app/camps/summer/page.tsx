@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Summer Camp | Bulldog Lacrosse Camps',
-  description: 'Join our 4-day summer lacrosse camp for players ages 7-17 at Yale University\'s Reese Stadium.',
+  title: 'Summer Day Camp | Bulldog Lacrosse Camps',
+  description: 'Join our 4-day instructional summer lacrosse camp for players ages 7-17 at Yale University.',
 };
 
 const heroImages = [
@@ -25,8 +25,8 @@ export default function SummerCampPage() {
       >
         <div className="absolute inset-0 bg-[#00356b]/80"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg">Bulldog Lacrosse Camp</h1>
-          <p className="text-xl text-gray-200">Ages 7-17 | 4 Days | Reese Stadium</p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg">Summer Day Camp</h1>
+          <p className="text-xl text-gray-200">Ages 7-17 | 4 Days (Mon–Thu) | 9am–1pm</p>
         </div>
       </section>
 
@@ -38,19 +38,19 @@ export default function SummerCampPage() {
             <div className="lg:col-span-2">
               <h2 className="text-2xl font-bold mb-6 text-[#00356b]">About the Camp</h2>
               <p className="text-gray-700 mb-6">
-                The Bulldog Summer Lacrosse Camp is a 4-day instructional camp that provides players
-                the opportunity to learn from members of the Yale Men&apos;s Lacrosse Staff, area college
-                coaches, local high school coaches, and Yale Men&apos;s Lacrosse players.
+                The Summer Day Camp is a 4-day instructional camp (Monday–Thursday) designed for
+                developmental purposes—not recruiting. Players ages 7-17 will learn fundamentals
+                from Yale coaches and staff in a fun, supportive environment.
               </p>
               <p className="text-gray-700 mb-6">
-                The first half of camp is spent developing the individual player. Individual skills
-                are taught and refined through focused instruction. The second half of camp is
-                dedicated to incorporating skills learned into games and scrimmage situations.
+                The first half of camp focuses on developing individual skills through focused
+                instruction. The second half incorporates those skills into games and scrimmage
+                situations.
               </p>
               <p className="text-gray-700 mb-8">
-                Campers are placed in groups based on both age and skill level, ensuring a
-                rewarding experience for all players regardless of experience. Every camper
-                receives firsthand instruction from Yale players and coaches.
+                Campers are grouped by age and skill level, ensuring a rewarding experience for
+                all players regardless of experience. Every camper receives firsthand instruction
+                from Yale players and coaches.
               </p>
 
               <h2 className="text-2xl font-bold mb-6 text-[#00356b]">What&apos;s Included</h2>
@@ -105,7 +105,7 @@ export default function SummerCampPage() {
             <div className="lg:col-span-1">
               <div className="bg-gray-50 rounded-xl p-6 sticky top-24">
                 <div className="text-center mb-6">
-                  <span className="text-4xl font-bold text-[#00356b]">$350</span>
+                  <span className="text-4xl font-bold text-[#00356b]">$375</span>
                   <p className="text-gray-600">per camper</p>
                 </div>
 

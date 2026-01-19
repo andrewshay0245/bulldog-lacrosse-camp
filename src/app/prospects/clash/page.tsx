@@ -37,7 +37,7 @@ export default function ClashPage() {
         <div className="absolute inset-0 bg-[#00356b]/80"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg">Bulldog Clash 2026</h1>
-          <p className="text-xl text-gray-200">Elite Prospect Showcase | Classes of 2028 & 2029</p>
+          <p className="text-xl text-gray-200">Elite Prospect Showcase | High School Players</p>
         </div>
       </section>
 
@@ -49,9 +49,13 @@ export default function ClashPage() {
             <div className="lg:col-span-2">
               <h2 className="text-2xl font-bold mb-6 text-[#00356b]">About the Bulldog Clash</h2>
               <p className="text-gray-700 mb-6">
-                The Bulldog Clash is an elite individual showcase for the classes of 2028 and 2029.
-                This premier recruiting event brings together top prospects with coaches from the
-                nation&apos;s best college lacrosse programs.
+                The Bulldog Clash is an elite high school prospect showcase held on a Friday in June.
+                This event features MORE Division I coaches than most prospect days, with coaches
+                from Yale, Notre Dame, Duke, UNC, and many top programs nationwide.
+              </p>
+              <p className="text-gray-700 mb-6">
+                The format is different from typical prospect days—designed to maximize exposure
+                and provide an excellent opportunity for serious recruits to be seen by top programs.
               </p>
               <p className="text-gray-700 mb-8">
                 All games are filmed in HD by Next Level Video from an elevated position, providing

@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export const metadata = {
   title: 'Bulldog 120 | Bulldog Lacrosse Camps',
-  description: 'Intensive lacrosse clinic for high school players at Yale University.',
+  description: 'Yale-specific prospect day for high school players. Coaches from Yale, NESCAC, and area D1 programs attend.',
 };
 
 const heroImages = [
@@ -26,7 +26,7 @@ export default function Bulldog120Page() {
         <div className="absolute inset-0 bg-[#00356b]/80"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg">Bulldog 120</h1>
-          <p className="text-xl text-gray-200">High School Players | Intensive Training</p>
+          <p className="text-xl text-gray-200">High School Players | Yale-Specific Prospect Day</p>
         </div>
       </section>
 
@@ -38,53 +38,51 @@ export default function Bulldog120Page() {
             <div className="lg:col-span-2">
               <h2 className="text-2xl font-bold mb-6 text-[#00356b]">About Bulldog 120</h2>
               <p className="text-gray-700 mb-6">
-                The Bulldog 120 is an intensive training clinic designed specifically for
-                high school players looking to elevate their game to the next level.
-                This focused session provides concentrated instruction from college-level
-                coaches and current players.
+                The Bulldog 120 is a Yale-specific prospect day designed for high school players
+                interested in Yale lacrosse. This intensive clinic format provides an opportunity
+                to showcase your skills in front of college coaches.
               </p>
               <p className="text-gray-700 mb-6">
-                Named for the intensity and focus packed into every minute, the Bulldog 120
-                emphasizes skill refinement, game IQ development, and competitive play.
-                Players receive personalized feedback and advanced techniques used at the
-                collegiate level.
+                Coaches from Yale, NESCAC schools, and area Division I programs attend to evaluate
+                talent. Players receive instruction, compete in drills, and demonstrate their
+                abilities in game situations.
               </p>
               <p className="text-gray-700 mb-8">
-                Whether you&apos;re preparing for high school varsity tryouts or looking to
-                get noticed by college recruiters, the Bulldog 120 provides the edge you need.
+                This is an excellent opportunity for players serious about playing at the collegiate
+                level, particularly those interested in Yale and similar academic/athletic programs.
               </p>
 
-              <h2 className="text-2xl font-bold mb-6 text-[#00356b]">What You&apos;ll Learn</h2>
+              <h2 className="text-2xl font-bold mb-6 text-[#00356b]">Event Highlights</h2>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Advanced positional techniques</span>
+                  <span>Yale-specific prospect day format</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Game situation decision-making</span>
+                  <span>Coaches from Yale, NESCAC, and D1 programs</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Competitive drills and scenarios</span>
+                  <span>Intensive clinic format</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Film study and feedback</span>
+                  <span>Competitive drills and game situations</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>College preparation guidance</span>
+                  <span>Great for players interested in Yale lacrosse</span>
                 </li>
               </ul>
             </div>
@@ -93,7 +91,7 @@ export default function Bulldog120Page() {
             <div className="lg:col-span-1">
               <div className="bg-gray-50 rounded-xl p-6 sticky top-24">
                 <div className="text-center mb-6">
-                  <span className="text-4xl font-bold text-[#00356b]">$125</span>
+                  <span className="text-4xl font-bold text-[#00356b]">$235</span>
                   <p className="text-gray-600">per player</p>
                 </div>
 

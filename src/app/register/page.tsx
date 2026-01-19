@@ -13,10 +13,10 @@ const heroImages = [
 ];
 
 const camps = [
-  { id: 'summer', name: 'Summer Camp', price: 350, ages: 'Ages 7-17' },
-  { id: 'bulldog-120', name: 'Bulldog 120', price: 125, ages: 'High School' },
-  { id: 'experience', name: 'Bulldog Experience', price: 135, ages: 'High School' },
-  { id: 'clash', name: 'Bulldog Clash', price: 350, ages: 'Class of 2028/2029' },
+  { id: 'summer', name: 'Summer Day Camp', price: 375, ages: 'Ages 7-17' },
+  { id: 'bulldog-120', name: 'Bulldog 120', price: 235, ages: 'High School' },
+  { id: 'experience', name: 'Bulldog Experience', price: 235, ages: 'High School' },
+  { id: 'clash', name: 'Bulldog Clash', price: 350, ages: 'High School' },
 ];
 
 const positions = ['Attack', 'Midfield', 'Defense', 'LSM', 'Face Off', 'Goalie'];

@@ -61,24 +61,24 @@ function calculateProcessingFee(amountCents: number): number {
 
 const camps: Record<string, { name: string; price: number; description: string }> = {
   'summer': {
-    name: 'Summer Lacrosse Camp',
-    price: 35000, // $350.00 in cents
+    name: 'Summer Day Camp',
+    price: 37500, // $375.00 in cents
     description: '4-day instructional camp for ages 7-17',
   },
   'bulldog-120': {
     name: 'Bulldog 120',
-    price: 12500, // $125.00 in cents
-    description: 'Intensive clinic for high school players',
+    price: 23500, // $235.00 in cents
+    description: 'Yale-specific prospect day for high school players',
   },
   'experience': {
     name: 'Bulldog Experience',
-    price: 13500, // $135.00 in cents
-    description: 'Immersive training for high school players',
+    price: 23500, // $235.00 in cents
+    description: 'Yale-specific prospect day for high school players',
   },
   'clash': {
     name: 'Bulldog Clash',
     price: 35000, // $350.00 in cents
-    description: 'Elite prospect showcase',
+    description: 'Elite prospect showcase with top D1 coaches',
   },
 };
 
