@@ -5,13 +5,23 @@ export const metadata = {
   description: 'Immersive lacrosse training experience for high school players at Yale University.',
 };
 
+const heroImages = [
+  '/images/action-1.jpg',
+  '/images/action-3.jpg',
+  '/images/camp-1.jpg',
+  '/images/camp-2.jpg',
+  '/images/camp-3.jpg',
+];
+
 export default function ExperiencePage() {
+  const randomImage = heroImages[Math.floor(Math.random() * heroImages.length)];
+
   return (
     <div>
       {/* Hero */}
       <section
         className="relative bg-cover bg-center py-20"
-        style={{ backgroundImage: 'url(/images/training-2.jpg)' }}
+        style={{ backgroundImage: `url(${randomImage})` }}
       >
         <div className="absolute inset-0 bg-[#00356b]/80"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

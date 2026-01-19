@@ -1,8 +1,16 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
+
+const heroImages = [
+  '/images/action-1.jpg',
+  '/images/action-3.jpg',
+  '/images/camp-1.jpg',
+  '/images/camp-2.jpg',
+  '/images/camp-3.jpg',
+];
 
 const camps = [
   { id: 'test', name: 'Test Registration', price: 1, ages: 'Staff Testing Only' },
@@ -24,6 +32,7 @@ interface PositionAvailability {
 function RegisterForm() {
   const searchParams = useSearchParams();
   const preselectedCamp = searchParams.get('camp');
+  const randomImage = useMemo(() => heroImages[Math.floor(Math.random() * heroImages.length)], []);
 
   const [formData, setFormData] = useState({
     camperFirstName: '',
@@ -118,7 +127,7 @@ function RegisterForm() {
       {/* Hero */}
       <section
         className="relative bg-cover bg-center py-16"
-        style={{ backgroundImage: 'url(/images/hero-bg.jpg)' }}
+        style={{ backgroundImage: `url(${randomImage})` }}
       >
         <div className="absolute inset-0 bg-[#00356b]/80"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

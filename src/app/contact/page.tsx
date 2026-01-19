@@ -1,8 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+
+const heroImages = [
+  '/images/action-1.jpg',
+  '/images/action-3.jpg',
+  '/images/camp-1.jpg',
+  '/images/camp-2.jpg',
+  '/images/camp-3.jpg',
+];
 
 export default function ContactPage() {
+  const randomImage = useMemo(() => heroImages[Math.floor(Math.random() * heroImages.length)], []);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -42,7 +51,7 @@ export default function ContactPage() {
       {/* Hero */}
       <section
         className="relative bg-cover bg-center py-20"
-        style={{ backgroundImage: 'url(/images/hero-bg.jpg)' }}
+        style={{ backgroundImage: `url(${randomImage})` }}
       >
         <div className="absolute inset-0 bg-[#00356b]/80"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
